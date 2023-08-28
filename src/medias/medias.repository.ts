@@ -6,30 +6,30 @@ import { PrismaService } from '../prisma/prisma.service';
 export class MediasRepository {
     constructor(private readonly prisma: PrismaService) { }
 
-    async createMedia(data: createMediaDTO){
-        await this.prisma.media.create({data: data})
+    async createMedia(data: createMediaDTO) {
+        await this.prisma.media.create({ data: data })
     }
 
-    async readMedia(data: createMediaDTO){
-        const media = await this.prisma.media.findFirst({where: {title: data.title, username: data.username}});
+    async readMedia(data: createMediaDTO) {
+        const media = await this.prisma.media.findFirst({ where: { title: data.title, username: data.username } });
         return media;
     }
 
-    async readMedias(){
+    async readMedias() {
         const medias = await this.prisma.media.findMany({});
         return medias;
     }
 
-    async readMediaId(id: number){
-        const media = await this.prisma.media.findFirst({ where: {id: Number(id)}});
+    async readMediaId(id: number) {
+        const media = await this.prisma.media.findFirst({ where: { id: Number(id) } });
         return media;
     }
 
-    async updateMediaId(id: number, data: createMediaDTO){
-        await this.prisma.media.update({ where: {id: Number(id)}, data: {title: data.title, username: data.username}})
+    async updateMediaId(id: number, data: createMediaDTO) {
+        await this.prisma.media.update({ where: { id: Number(id) }, data: { title: data.title, username: data.username } })
     }
 
-    async deleteMediaId(id: number){
-        await this.prisma.media.delete({ where: {id: id}})
+    async deleteMediaId(id: number) {
+        await this.prisma.media.delete({ where: { id: Number(id) } })
     }
 }
